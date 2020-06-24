@@ -38,15 +38,34 @@ function create(){
     stand.setScale(0.25);
     
     //lets create wheel
-    let wheel = this.add.sprite(W/2,H/2,'wheel');
-    wheel.setScale(0.25);
+    this.wheel = this.add.sprite(W/2,H/2,'wheel');
+    this.wheel.setScale(0.25);
     
     //lets create a pin 
     let pin = this.add.sprite(W/2,H/2-250,'pin');
     pin.setScale(0.25);
     
+    //Event listener for mouse click
+    this.input.on("pointerdown",spinwheel,this);
+    
+    //Created text object
+    font_style = {
+        font : "bold 30px Arial",
+        align : "center",
+        color : "red",
+    }
+    this.game_text = this.add.text(10,10,"Welcome to Spin & Win",font_style);
+    
 }
 //Game Loop
 function update(){
     console.log("Update");
+    this.wheel.angle += 5;
+}
+
+function spinwheel(){
+    
+    console.log("You clicked the mouse");
+    console.log("Start spinning");
+    this.game_text.setText("You clicked the mouse");
 }
