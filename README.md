@@ -1,2 +1,2 @@
 # Spin_Wheel
-Spining_Wheel by JavaScript
+Spining_Wheel by JavaScript And HTML
