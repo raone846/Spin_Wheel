@@ -1,4 +1,12 @@
 //How to create the basic skeleton for the game -> Game Loop
+
+let prizes_config = {
+    count:12,
+    prize_names : ["3000 credits","35% Off","Hard Luck","70% OFF","Swagpack","100% OFF","Netflix","50% Off","Amazon Voucher","2 Extra Spin","CB Tshirt","CB Book"]
+}
+
+
+
 let config = {
     type : Phaser.CANVAS,
     width : 800,
@@ -60,12 +68,31 @@ function create(){
 //Game Loop
 function update(){
     console.log("Update");
-    this.wheel.angle += 5;
+   //this.wheel.angle += 5;
 }
 
 function spinwheel(){
     
-    console.log("You clicked the mouse");
+    console.log("You clicked the mouse!");
     console.log("Start spinning");
-    this.game_text.setText("You clicked the mouse");
+    this.game_text.setText("Best Of Luck!!!");
+    
+    let rounds = Phaser.Math.Between(2,4);
+    let degrees = Phaser.Math.Between(0,11)*30;
+    
+    let total_angle = rounds*360 + degrees;
+    console.log(total_angle);
+    
+    let idx = prizes_config.count - 1 - Math.floor(degrees/(360/prizes_config.count));
+    
+    tween  = this.tweens.add({
+        targets: this.wheel,
+        angle: total_angle,
+        ease: "Cubic.easeOut",
+        duration: 6000,
+        callbackScope:this,
+        onComplete:function(){
+            this.game_text.setText("You won: " + prizes_config.prize_names[idx]);
+        },
+    });
 }
